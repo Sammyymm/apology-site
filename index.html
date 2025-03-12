@@ -3,24 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Sorry</title>
+    <title>I'm Sorry ❤️</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background: url('https://source.unsplash.com/1600x900/?love,romance') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
             padding: 50px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .message {
-            background: white;
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
             display: inline-block;
             max-width: 500px;
+            animation: popIn 1s ease-in-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         h1 {
-            color: red;
+            color: #ff4d4d;
+        }
+        button {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+        #question-box, #surprise, #next-question {
+            display: none;
+            margin-top: 20px;
+        }
+        .yes-red {
+            background: red;
         }
     </style>
 </head>
@@ -28,8 +59,78 @@
     <div class="message">
         <h1>I'm Sorry ❤️</h1>
         <p>Hey [Her Name],</p>
-        <p>I just want to say I’m truly sorry. I never meant to hurt you, and I regret how things played out. You mean a lot to me, and I hope we can talk soon.</p>
-        <p>— [Your Name]</p>
+        <p>
+            I know I messed up, and I deeply regret it. The last thing I ever want is to make you feel unappreciated, unheard, or hurt.  
+            You mean the absolute world to me, and I don’t take you for granted.  
+            I love you more than words can express, and I just want to make things right between us.  
+            I’ve left my guard down completely for you, and at this point, if you ever left, I’d be devastated.  
+            You’re the one I trust with everything, and I never want to do anything to make you regret choosing me.  
+            Please forgive me, [Her Name]. You’re too special to me to let this come between us. 💙  
+        </p>
+
+        <!-- First Question -->
+        <div id="question-box">
+            <p>Are you still mad at me? 🥹</p>
+            <button onclick="nextQuestion('yes')">Yes</button>
+            <button onclick="nextQuestion('no')">No</button>
+        </div>
+
+        <!-- Second Question -->
+        <div id="next-question">
+            <p id="next-text"></p>
+            <button id="yes-button" onclick="nextQuestion('yes-again')">Yes</button>
+            <button onclick="nextQuestion('no-again')">No</button>
+        </div>
+
+        <!-- Surprise Message -->
+        <p id="surprise">No matter what, I’ll always care about you ❤️</p>
+
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <img src="https://source.unsplash.com/400x300/?couple,love" id="slide1">
+            <img src="https://source.unsplash.com/400x300/?heart,romantic" id="slide2">
+            <img src="https://source.unsplash.com/400x300/?flowers,cute" id="slide3">
+        </div>
+
+        <!-- Audio -->
+        <audio controls autoplay>
+            <source src="your-audio-file.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
+
+    <script>
+        function nextQuestion(answer) {
+            if (answer === 'yes') {
+                document.getElementById("next-text").innerText = "Do you want to talk to me?";
+                document.getElementById("question-box").style.display = "none";
+                document.getElementById("next-question").style.display = "block";
+            } else if (answer === 'no') {
+                document.getElementById("next-text").innerText = "For reals? 🧐";
+                document.getElementById("yes-button").classList.add("yes-red");
+                document.getElementById("question-box").style.display = "none";
+                document.getElementById("next-question").style.display = "block";
+            } else if (answer === 'yes-again') {
+                document.getElementById("next-text").innerText = "Do you want to talk to me?";
+            } else if (answer === 'no-again') {
+                document.getElementById("next-question").style.display = "none";
+                document.getElementById("surprise").style.display = "block";
+            }
+        }
+
+        // Slideshow Logic
+        let slides = document.querySelectorAll(".slideshow img");
+        let index = 0;
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            index++;
+            if (index > slides.length) { index = 1; }
+            slides[index - 1].style.display = "block";
+            setTimeout(showSlides, 3000);
+        }
+        showSlides();
+    </script>
 </body>
 </html>
